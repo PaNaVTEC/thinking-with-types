@@ -1,0 +1,20 @@
+name:                thinking-with-types
+version:             0.1.0.0
+#synopsis:
+#description:
+homepage:            https://github.com/panavtec/thinking-with-types#readme
+license:             BSD3
+author:              Christian Panadero
+maintainer:          panavtec@gmail.com
+copyright:           Apache2
+category:            katas
+extra-source-files:
+- README.md
+
+dependencies:
+  - base >= 4.7 && < 5
+
+executables:
+  thinking-with-types:
+    source-dirs:      src
+    main:             Main.hs

@@ -1,0 +1,30 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 08b52b4433fe070389d7ceb069230a501e0bdc3e47d27d0e8dfaa8c6b1730ab1
+
+name:           thinking-with-types
+version:        0.1.0.0
+category:       katas
+homepage:       https://github.com/panavtec/thinking-with-types#readme
+author:         Christian Panadero
+maintainer:     panavtec@gmail.com
+copyright:      Apache2
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+
+executable thinking-with-types
+  main-is: Main.hs
+  other-modules:
+      Paths_thinking_with_types
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
