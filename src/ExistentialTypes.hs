@@ -1,7 +1,12 @@
 {-# LANGUAGE GADTs #-}
+{-# LANGUAGE KindSignatures #-}
+{-# LANGUAGE ConstraintKinds #-}
 {-# LANGUAGE RankNTypes #-}
+{-# LANGUAGE FlexibleInstances #-}
 
 module ExistentialTypes where
+
+import Data.Kind (Constraint, Type)
 
 data Any where Any :: a -> Any
 
@@ -30,3 +35,14 @@ elimHasShow f (HasShow a) = f a
 
 f' :: String
 f' = elimHasShow ((<>) "Hola" . show) (HasShow (1 :: Integer))
+
+data Has (c :: Type -> Constraint) where Has :: c t => t -> Has c
+
+elimHas
+  :: (forall a. c a => a -> r)
+  -> Has c
+  -> r
+elimHas f (Has a) = f a
+
+type HasShow' = Has Show
+instance Show (Has Show) where show = elimHas show
