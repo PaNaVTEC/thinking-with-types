@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.31.0.
+-- This file has been generated from package.yaml by hpack version 0.31.1.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 30d7c2ab0f826a130e9b344cc516d8bae0375e1f34ea7508c9dff8201d5f3683
+-- hash: 1493cd75644754e5a84ed972ab2aa13132aebe89bd4e0871036f60efe8d2e173
 
 name:           thinking-with-types
 version:        0.1.0.0
@@ -23,6 +23,7 @@ executable thinking-with-types
   main-is: Main.hs
   other-modules:
       ContinuationMonad
+      ExistentialTypes
       Paths_thinking_with_types
   hs-source-dirs:
       src
