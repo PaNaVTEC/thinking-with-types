@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 1493cd75644754e5a84ed972ab2aa13132aebe89bd4e0871036f60efe8d2e173
+-- hash: 382110a12d869360d44753476effb63e60996a25f49fe7d2c869f37ab35b2667
 
 name:           thinking-with-types
 version:        0.1.0.0
@@ -22,8 +22,11 @@ extra-source-files:
 executable thinking-with-types
   main-is: Main.hs
   other-modules:
+      AssociatedTypeFamilies
       ContinuationMonad
       ExistentialTypes
+      FirstClassFamilies
+      TypeLevelDefunctionalization
       Paths_thinking_with_types
   hs-source-dirs:
       src
