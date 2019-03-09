@@ -15,6 +15,9 @@ dependencies:
   - base >= 4.7 && < 5
   - first-class-families
   - vector
+  - mtl
+  - aeson
+  - text
 
 executables:
   thinking-with-types:

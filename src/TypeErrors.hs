@@ -57,23 +57,33 @@ type FindElem (key :: Symbol) (ts :: [(Symbol, k)]) =
 
 type family ThrowIfNothing
       (result :: Maybe a)
-      (key :: Symbol) :: Constraint where
-  ThrowIfNothing ('Just a) _ = ()
-  ThrowIfNothing 'Nothing key =
+      (key :: Symbol)
+      (ts :: [(Symbol, k)]) :: Constraint where
+  ThrowIfNothing ('Just a) _ _ = ()
+  ThrowIfNothing 'Nothing key ts =
     TypeError
          ( 'Text "Attempting to access a field named "
          ':<>: 'Text key
          ':<>: 'Text " to an OpenProduct, but that it does not exist."
          ':$$: 'Text "But the OpenProduct already has a field "
          ':<>: 'Text "Consider using insert before."
+         ':$$: 'Text ""
+         ':<>: ShowList (Eval (Map Fst ts))
          )
+
+type family ShowList (symbols :: [k]) :: ErrorMessage where
+  ShowList ts = Eval
+    (
+      Foldr (Pure2 (:<>:)) ('Text "")
+      (Eval (Map (Pure1 'ShowType) ts))
+    )
 
 type FindElem' (key :: Symbol) (ts :: [(Symbol, k)])
   = Eval (FindIndex (TyEq key <=< Fst) ts)
 
 findElem
   :: forall key ts
-  . ThrowIfNothing (FindElem' key ts) key
+  . ThrowIfNothing (FindElem' key ts) key ts
   => KnownNat (FindElem key ts)
   => Int
 findElem = fromIntegral
@@ -85,7 +95,7 @@ type LookupType (key :: k) (ts :: [(k, t)]) =
 
 get
   :: forall key ts f
-   . ThrowIfNothing (FindElem' key ts) key
+   . ThrowIfNothing (FindElem' key ts) key ts
   => KnownNat (FindElem key ts)
   => Key key
   -> OpenProduct f ts
@@ -100,7 +110,7 @@ type UpdateElem (key :: Symbol) (t :: k) (ts :: [(Symbol, k)]) =
 
 update
   :: forall key ts t f
-  . ThrowIfNothing (FindElem' key ts) key
+  . ThrowIfNothing (FindElem' key ts) key ts
   => KnownNat (FindElem key ts)
   => Key key
   -> f t
@@ -114,7 +124,7 @@ type DeleteElem (key :: Symbol) (ts :: [(Symbol, k)]) =
 
 delete
   :: forall f key ts
-  . ThrowIfNothing (FindElem' key ts) key
+  . ThrowIfNothing (FindElem' key ts) key ts
   => KnownNat (FindElem key ts)
   => Key key
   -> OpenProduct f ts

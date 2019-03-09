@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 63d8de32ff75ed9dadcfffa26d9c0214d078ded719be2b9a02b254b1a20787ee
+-- hash: 2e65b96523e78947693ffe350d93321a9971f8379bfb3a601719165ab1985b66
 
 name:           thinking-with-types
 version:        0.1.0.0
@@ -26,6 +26,8 @@ executable thinking-with-types
       ContinuationMonad
       ExistentialTypes
       FirstClassFamilies
+      GenericMetadata
+      Generics
       OpenProducts
       OpenSums
       TypeErrors
@@ -34,7 +36,10 @@ executable thinking-with-types
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , first-class-families
+    , mtl
+    , text
     , vector
   default-language: Haskell2010
